@@ -31,6 +31,14 @@ describe("./musicians endpoint", () => {
   });
 });
 
+describe("./musician/:id endpoint", () => {
+  //   A HTTP status code of 200 indicates a successful GET request was made. We can access a status code using the response.statusCode method.
+  test("Testing musician endpoint", async () => {
+    const response = await request(app).get("/musicians/:id");
+    expect(response.statusCode).toBe(200);
+  });
+});
+
 describe("./bands endpoint", () => {
   //   A HTTP status code of 200 indicates a successful GET request was made. We can access a status code using the response.statusCode method.
   test("Testing bands endpoint", async () => {
