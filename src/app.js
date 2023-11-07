@@ -2,22 +2,22 @@ const express = require("express");
 const app = express();
 const { Musician } = require("../models/index");
 const { Band } = require("../models/index");
-const { db } = require("../db/connection");
-
-const port = 3000;
+// Import routes
+const musiciansRouter = require("../routes/musicians.js");
+app.use("/musicians", musiciansRouter);
 
 //Create a GET /musicians route to return all musicians
-app.get("/musicians", async (req, res) => {
-  const musicians = await Musician.findAll();
-  // Send musicians as converted to a JSON string .
-  res.json(musicians);
-});
-app.get("/musicians/:id", async (request, resolve) => {
-  const id = request.params.id;
-  const musicians = await Musician.findByPk(id);
-  // Send musicians as converted to a JSON string .
-  resolve.json(musicians);
-});
+// app.get("/musicians", async (req, res) => {
+//   const musicians = await Musician.findAll();
+//   // Send musicians as converted to a JSON string .
+//   res.json(musicians);
+// });
+// app.get("/musicians/:id", async (request, resolve) => {
+//   const id = request.params.id;
+//   const musicians = await Musician.findByPk(id);
+//   // Send musicians as converted to a JSON string .
+//   resolve.json(musicians);
+// });
 
 // app.get("/musicians/1", async (req, res) => {
 //   const musiciansOne = await Musician.findByPk(1);
@@ -44,40 +44,40 @@ app.get("/bands", async (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.post("/musicians", async (request, resolve) => {
-  await Musician.create({
-    name: request.body.name,
-    instrument: request.body.instrument,
-  });
+// app.post("/musicians", async (request, resolve) => {
+//   await Musician.create({
+//     name: request.body.name,
+//     instrument: request.body.instrument,
+//   });
 
-  const musicians = await Musician.findAll();
-  resolve.json(musicians);
-});
+//   const musicians = await Musician.findAll();
+//   resolve.json(musicians);
+// });
 
-app.put("/musicians/:id", async (request, resolve) => {
-  await Musician.update(
-    {
-      name: request.body.name,
-      instrument: request.body.instrument,
-    },
-    {
-      where: {
-        id: request.params.id,
-      },
-    }
-  );
-  const thisMusician = await Musician.findByPk(request.params.id);
-  resolve.json(thisMusician);
-});
+// app.put("/musicians/:id", async (request, resolve) => {
+//   await Musician.update(
+//     {
+//       name: request.body.name,
+//       instrument: request.body.instrument,
+//     },
+//     {
+//       where: {
+//         id: request.params.id,
+//       },
+//     }
+//   );
+//   const thisMusician = await Musician.findByPk(request.params.id);
+//   resolve.json(thisMusician);
+// });
 
-app.delete("/musicians/:id", async (request, resolve) => {
-  await Musician.destroy({
-    where: {
-      id: request.params.id,
-    },
-  });
+// app.delete("/musicians/:id", async (request, resolve) => {
+//   await Musician.destroy({
+//     where: {
+//       id: request.params.id,
+//     },
+//   });
 
-  resolve.send("Item deleted");
-});
+//   resolve.send("Item deleted");
+// });
 
 module.exports = app;

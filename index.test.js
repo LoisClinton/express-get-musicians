@@ -8,6 +8,7 @@ const { db } = require("./db/connection");
 const { Musician } = require("./models/index");
 const app = require("./src/app");
 const seedMusician = require("./seedData");
+const express = require("express");
 
 describe("./musicians endpoint", () => {
   //   A HTTP status code of 200 indicates a successful GET request was made. We can access a status code using the response.statusCode method.
